@@ -31,20 +31,20 @@ public class Card {
 		public String getDescription() {
 			return description;
 		}
-		public String getSize() {
-			return String.valueOf(size);
+		public int getSize() {
+			return size;
 		}
-		public String getSpeed() {
-			return String.valueOf(speed);
+		public int getSpeed() {
+			return speed;
 		}
-		public String getCargo() {
-			return String.valueOf(cargo);
+		public int getCargo() {
+			return cargo;
 		}
-		public String getRange() {
-			return String.valueOf(range);
+		public int getRange() {
+			return range;
 		}
-		public String getFirepower() {
-			return String.valueOf(firepower);
+		public int getFirepower() {
+			return firepower;
 		}
 		
 		/*a method that returns the value
