@@ -1,15 +1,16 @@
 package commandline;
 
+import java.util.ArrayList;
 
 public class Player {
 		
 			private String playerID;
 			private int winCounter; 
 			private int numberOfPlayers;
-			private Cards[] hand; 
+			private ArrayList<Cards> hand; 
 			
 		//constructor for the player and how many cards the player has
-		public Player(String playerID, Cards[] hand){
+		public Player(String playerID, ArrayList<Cards> hand){
 			this.playerID = playerID;
 			this.hand = hand;
 				
@@ -29,5 +30,27 @@ public class Player {
 		public void placeCard() {
 			
 		}
+
+		public ArrayList<Cards> getHand() {
+			return hand;
+		}
+		
+		public int getWinCounter() {
+			return winCounter;
+		}
+		
+		public void incrementCounter() {
+			winCounter++;
+		}
+		
+		public void addCard(Cards card) {
+			hand.add(card);
+		}
+
+	
+		
+		
+		
+		
 		
 }
