@@ -1,4 +1,3 @@
-package commandline;
 
 import java.util.ArrayList;
 
@@ -85,14 +84,18 @@ public class Main {
 			System.out.println("Game Start");
 			
 //			Initialize deck
+			CardDeck mainDeck = new CardDeck(new ArrayList<Cards>());
 			
+
+			mainDeck.initializeDeck();
+
 			
 //			Deal cards to players - Needs work!
-//			int cardsPerPlayer = Deck.size() / players.size();
-//			
-//			for (Player player : players) {
-//				Deck.dealCards(cardsPerPlayer, player);
-//			}
+			int cardsPerPlayer = mainDeck.getDeck().size() / players.size();
+			
+			for (Player player : players) {
+				mainDeck.dealCards(cardsPerPlayer, player);
+			}
 			
 			
 			
@@ -204,7 +207,6 @@ public class Main {
 			for(Player player : endgameArray) {
 				System.out.println(player.toString() + ": " + player.getWinCounter());
 			}	
-		
 		}	
 			
 		mode = gameOrStats();
@@ -214,12 +216,15 @@ public class Main {
 
 	public static int gameOrStats() {
 		Scanner sc = new Scanner(System.in);	
+		int res = 0;
+		while(res != 1 && res != 2) {
 		System.out.print("Do you want to see past results or play a game?\n" + 
 				"   1: Print Game Statistics\n" + 
 				"   2: Play game\n" + 
 				"Enter the number for your selection: ");
+		 res = sc.nextInt();
+		}
 		
-		int res = sc.nextInt();
 		return res;
 	}
 	
@@ -236,5 +241,4 @@ public class Main {
 		}
 	}
 	
-
 }

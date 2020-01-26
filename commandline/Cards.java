@@ -1,5 +1,3 @@
-package commandline;
-
 import java.util.ArrayList;
 
 public class Cards {
@@ -80,7 +78,10 @@ public class Cards {
 		}
 
 		
-
+		public String toString() {
+			String cardvalues = " Description: " + this.getDescription() + " Cargo: " + this.getCargo()  + " Firepower: " + this.getFirepower() + " Range: " + this.getRange() + " Speed: " + this.getSpeed() + " Size: " + this.getSize() + " ";
+			return cardvalues;
+		}
 
 		
 		
