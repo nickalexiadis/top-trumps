@@ -106,9 +106,10 @@ public class TopTrumpsDatabase {
 			  }
 		}
 		
-		//James, query to return the average number of draws 
+		//query to return the average number of draws 
 		public double getNumberOfDraws() throws SQLException {
-			String QueryFour = 
+			String QueryFour = "select AVG(DRAWS)" + 
+			                   "from TABLE";
 			return numberOfDraws;	
 		}
 		
