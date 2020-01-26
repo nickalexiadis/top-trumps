@@ -108,9 +108,23 @@ public class TopTrumpsDatabase {
 		
 		//query to return the average number of draws 
 		public double getNumberOfDraws() throws SQLException {
+		Statement stmt = null;
 			String QueryFour = "select AVG(DRAWS)" + 
-			                   "from TABLE";
-			return numberOfDraws;	
+							   "from TABLE";
+				
+			try {
+				stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+				while(rs.next()) {
+					int numberOfDraws = rs.getInt("DRAWS");
+					System.out.println(numberOfDraws + "\t");
+				}
+			} catch (SQLException e) {
+				
+			}finally {
+				if (stmt != null) { stmt.close();
+				}
+			}
 		}
 		
 		//Nana, query to return the largest number of rounds played in a single game
