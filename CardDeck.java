@@ -9,7 +9,10 @@ public class CardDeck {
 	 * by comparing the 5 cards attributes, and will further place the cards that
 	 * were satisfying the draw condition within the common pile.
 	 */
-		
+//////////////////////////////////added by Linh//////////////////////////////////////////////////////
+		//A deck contains an array of Cards
+		private Cards[] cardsInDeck = new Cards[40];
+////////////////////////////////////////////////////////////////////////////////////////////////////
 		//deck size is always 40
 	    private int DECK_SIZE=40;
 	    //initial deck, empty
@@ -51,11 +54,40 @@ public class CardDeck {
 				//if (TopTrumpsCLIApplication.writingTestLogs==true) {
 				//				TopTrumpsCLIApplication.testlog.log(Level.FINE, "The contents of the complete deck once it has been read in and constructed" + "getDeckContent");
 				//}
+			
 				
-				//public String[]/String getDeckContent
-				// Move through the Deck and read the card objects and add their content to a String-Array or a String-Buffer
-				//A long String would be prefered, so only one log entry is needed
+/////////////////////////////added by Linh//////////////////////////////////////////////////////
+				//this method can be used on a Hand, on a Deck on a communal pile as long as you give the corresponding array of cards as a parameter - it will convert all the cards in an Array of Strings
+				public static String[] readDeckContents(Cards[] cd) {
+					String[] deckContentArray;
+					deckContentArray = new String[40];
+					for (int i = 0; i < cd.length; i++) {
+						deckContentArray[i] = cd[i].toString();
+					}
+					return deckContentArray;
+				}
 				
+				
+				//Convert the Array of Strings to one String with all the Deck Content Information for logging purposes
+				public static String addDeckContentsStringsToOneString(Cards[] cd) {
+					 StringBuffer sb = new StringBuffer(""); //String, where you can add stuff at the end, but it's the same object
+					 String[] deckAsStrings = readDeckContents(cd);
+					 for (String cardString : deckAsStrings) {//for each element in the the deckAsStrings array
+						sb.append(cardString);
+					}
+					String completeDeckAsOneString = sb.toString();
+					return completeDeckAsOneString;
+				}
+				
+				//just Standard getters and setters, might have to be modified
+				public Cards[] getCardsInDeck() {
+					return cardsInDeck;
+				}
+				//just Standard getters and setters, might have to be modified
+				public void setCardsInDeck(Cards[] cardsInDeck) {
+					this.cardsInDeck = cardsInDeck;
+				}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 

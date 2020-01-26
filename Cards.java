@@ -44,4 +44,10 @@ public class Cards {
 	public int getFirepower() {
 		return firepower;
 	}
+	
+	//toString Method needed added by Linh
+	public String toString() {
+		String cardvalues = " Cargo: " + this.getCargo() + " Description: " + this.getDescription() + " Firepower: " + this.getFirepower() + " Range: " + this.getRange() + " Speed: " + this.getSpeed() + " Size: " + this.getSize() + " ";
+		return cardvalues;
+	}
 }
