@@ -43,19 +43,18 @@ public class TopTrumpsDatabase {
 			
 		}
 		
-		//update the database
-		 public int updateGameStats(int id, String lastName) {
-		        String SQL = "UPDATE actor "
-		                + "SET last_name = ? "
-		                + "WHERE actor_id = ?";
-		 
+		//update the database, not final!
+		 public int updateGameStats(int numberOfGames, int computerWins, int humanWins, double numberOfDraws, int numberOfRoundsPlayedInGame) {
+		        String SQL = "UPDATE NUMBER_OF_GAMES, COMPUTER_WINS, HUMAN_WINS, DRAWS, ROUNDS_PLAYED";
 		        int affectedrows = 0;
-		 
 		        try (Connection connection = connect();
 		                java.sql.PreparedStatement pstmt = connection.prepareStatement(SQL)) {
 		 
-		            pstmt.setString(1, lastName);
-		            pstmt.setInt(2, id);
+		            pstmt.setInt(0, numberOfGames);
+		            pstmt.setInt(0, computerWins);
+		            pstmt.setInt(0, humanWins);
+		            pstmt.setDouble(0, numberOfDraws);
+		            pstmt.setInt(0, numberOfRoundsPlayedInGame);
 		 
 		            affectedrows = pstmt.executeUpdate();
 		 
@@ -70,7 +69,7 @@ public class TopTrumpsDatabase {
 		public int getNumberOfGames() throws SQLException {
 			Statement stmt = null;
 			String queryOne = "select SUM(NUMBER_OF_GAMES)" +
-							  "from table"; 
+							  "from GAME_STATS"; 
 			try {
 				stmt = connect().createStatement();
 				ResultSet rs = stmt.executeQuery(queryOne);
@@ -91,7 +90,7 @@ public class TopTrumpsDatabase {
 		public int getComputerWins() throws SQLException {
 			Statement stmt = null;
 			String queryTwo = "select SUM(COMPUTER_WINS)" + 
-							  "from table";
+							  "from GAME_STATS";
 			try {
 				stmt = connect().createStatement();
 				ResultSet rs = stmt.executeQuery(queryTwo);
@@ -112,7 +111,7 @@ public class TopTrumpsDatabase {
 		public int getHumanWins() throws SQLException {
 			Statement stmt = null;
 			String queryThree = "select SUM(HUMAN_WINS)" +
-								"from table";
+								"from GAME_STATS";
 			try {
 				stmt = connect().createStatement();
 				ResultSet rs = stmt.executeQuery(queryThree);
@@ -133,7 +132,7 @@ public class TopTrumpsDatabase {
 		public double getNumberOfDraws() throws SQLException {
 			Statement stmt = null;
 			String queryFour = "select AVG(DRAWS)" + 
-							   "from TABLE";
+							   "from GAME_STATS";
 
 			try {
 				stmt = connect().createStatement();
@@ -153,8 +152,6 @@ public class TopTrumpsDatabase {
 		
 		//Nana, query to return the largest number of rounds played in a single game
 		public int getNumberOfRoundsPlayedInGame() throws SQLException {
-			String queryFive = 
-					
 			return numberOfRoundsPlayedInGame;	
 		}	
 }
