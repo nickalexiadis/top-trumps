@@ -44,18 +44,13 @@ public class TopTrumpsDatabase {
 		}
 		
 		//update the database
-		 public int updateGameStats(int id, String lastName) {
-		        String SQL = "UPDATE actor "
-		                + "SET last_name = ? "
-		                + "WHERE actor_id = ?";
+		 public int updateGameStats() {
+		        String SQL = 
 		 
 		        int affectedrows = 0;
 		 
 		        try (Connection connection = connect();
 		                java.sql.PreparedStatement pstmt = connection.prepareStatement(SQL)) {
-		 
-		            pstmt.setString(1, lastName);
-		            pstmt.setInt(2, id);
 		 
 		            affectedrows = pstmt.executeUpdate();
 		 
