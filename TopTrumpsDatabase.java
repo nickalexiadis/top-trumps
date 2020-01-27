@@ -44,13 +44,18 @@ public class TopTrumpsDatabase {
 		}
 		
 		//update the database
-		 public int updateGameStats() {
-		        String SQL = 
+		 public int updateGameStats(int id, String lastName) {
+		        String SQL = "UPDATE actor "
+		                + "SET last_name = ? "
+		                + "WHERE actor_id = ?";
 		 
 		        int affectedrows = 0;
 		 
 		        try (Connection connection = connect();
 		                java.sql.PreparedStatement pstmt = connection.prepareStatement(SQL)) {
+		 
+		            pstmt.setString(1, lastName);
+		            pstmt.setInt(2, id);
 		 
 		            affectedrows = pstmt.executeUpdate();
 		 
@@ -68,7 +73,7 @@ public class TopTrumpsDatabase {
 							  "from table"; 
 			try {
 				stmt = connect().createStatement();
-				ResultSet rs = stmt.executeQuery(query);
+				ResultSet rs = stmt.executeQuery(queryOne);
 				while(rs.next()) {
 					int numberOfGames = rs.getInt("NUMBER_OF_GAMES");
 					System.out.println(numberOfGames+ "\t");
@@ -79,16 +84,17 @@ public class TopTrumpsDatabase {
 				if (stmt != null) { stmt.close();
 			        }
 			  }
+			return numberOfGames;
 		 }
 		
 		//query to return how many times the computer has won 
 		public int getComputerWins() throws SQLException {
 			Statement stmt = null;
-			String QueryTwo = "select SUM(COMPUTER_WINS)" + 
+			String queryTwo = "select SUM(COMPUTER_WINS)" + 
 							  "from table";
 			try {
 				stmt = connect().createStatement();
-				ResultSet rs = stmt.executeQuery(query);
+				ResultSet rs = stmt.executeQuery(queryTwo);
 				while(rs.next()) {
 					int computerWins = rs.getInt("COMPUTER_WINS");
 					System.out.println(computerWins + "\t");
@@ -99,16 +105,17 @@ public class TopTrumpsDatabase {
 				if (stmt != null) { stmt.close();
 			        }
 			  }
+			return computerWins;
 		}
 		
 		//query to return how many times the human has won  
 		public int getHumanWins() throws SQLException {
 			Statement stmt = null;
-			String QueryThree = "select SUM(HUMAN_WINS)" +
+			String queryThree = "select SUM(HUMAN_WINS)" +
 								"from table";
 			try {
 				stmt = connect().createStatement();
-				ResultSet rs = stmt.executeQuery(query);
+				ResultSet rs = stmt.executeQuery(queryThree);
 				while(rs.next()) {
 					int humanWins = rs.getInt("HUMAN_WINS");
 					System.out.println(humanWins + "\t");
@@ -119,17 +126,18 @@ public class TopTrumpsDatabase {
 				if (stmt != null) { stmt.close();
 			        }
 			  }
+			return humanWins;
 		}
 		
 		//James, query to return the average number of draws 
 		public double getNumberOfDraws() throws SQLException {
 			Statement stmt = null;
-			String QueryFour = "select AVG(DRAWS)" + 
+			String queryFour = "select AVG(DRAWS)" + 
 							   "from TABLE";
 
 			try {
 				stmt = connect().createStatement();
-				ResultSet rs = stmt.executeQuery(query);
+				ResultSet rs = stmt.executeQuery(queryFour);
 				while(rs.next()) {
 					int numberOfDraws = rs.getInt("DRAWS");
 					System.out.println(numberOfDraws + "\t");
@@ -140,11 +148,13 @@ public class TopTrumpsDatabase {
 				if (stmt != null) { stmt.close();
 				}
 			}
+			return numberOfDraws;
 		}
 		
 		//Nana, query to return the largest number of rounds played in a single game
 		public int getNumberOfRoundsPlayedInGame() throws SQLException {
-			String QueryFive = 
+			String queryFive = 
+					
 			return numberOfRoundsPlayedInGame;	
 		}	
 }
