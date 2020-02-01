@@ -55,7 +55,7 @@ public class Cards {
 		}
 		
 		
-//		Returns the highest attribute of a card
+//		Returns the highest attribute of a card 
 		public int getMax() {
 			
 			ArrayList<Integer> attrArr = attributeArray();
@@ -63,7 +63,13 @@ public class Cards {
 			int maxIndex = 0;
 			
 			for (int i = 0; i < attrArr.size(); i++) {
-				if(attrArr.get(i) > max) maxIndex = i;
+				// wert  1 = 5 wert 2 = 7 wert 3 = 6
+				if(attrArr.get(i) > max) {
+					maxIndex = i;
+					// this was missing, how can you do it without it?
+					max = attrArr.get(i);
+				}
+				
 			}
 			
 			return maxIndex;
@@ -80,7 +86,10 @@ public class Cards {
 		}
 
 		
-
+		public String toString() {
+			String cardvalues = " Description: " + this.getDescription() + " Cargo: " + this.getCargo()  + " Firepower: " + this.getFirepower() + " Range: " + this.getRange() + " Speed: " + this.getSpeed() + " Size: " + this.getSize() + " ";
+			return cardvalues;
+		}
 
 		
 		
