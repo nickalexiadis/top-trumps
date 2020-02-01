@@ -55,56 +55,14 @@ public static boolean writingTestLogs;
 		boolean userWantsToQuit = false; // flag to check whether the user wants to quit the application
 		
 		// Loop until the user wants to exit the game
-		while (!userWantsToQuit) {
+		//while (!userWantsToQuit) {
 			// ----------------------------------------------------
 			// Add your game logic here based on the requirements
 			// ----------------------------------------------------
-			System.out.println("Do you want to display statistics from previous games(1) or start a new game(2)? Choose by entering the number");
-			Scanner keyboardInputScanner = new Scanner(System.in);
-			String keyboardchoice = keyboardInputScanner.nextLine();
-			if (keyboardchoice.equalsIgnoreCase("1")) {
-				// displayGameStatistics(); // method that gets statistics from db needs to be added
-			}else if (keyboardchoice.equalsIgnoreCase("2")) {
-				//depending on the implementation of gameplay either newGame() method has to be called or just proceed without doing anything and the next step will be the start of the gameplay
-			}else {
-				//In case of neither "1" or "2" do we want to start a new game or ask again(more complicated and including a loop)
-			}
+			Main.main(args);
 						
-			userWantsToQuit=true; // use this when the user wants to exit the game
+		//	userWantsToQuit=true;  use this when the user wants to exit the game
 		}
 		
-		
-		//Logging code that needs to be inserted into the right gameplay code
-		if (TopTrumpsCLIApplication.writingTestLogs==true) {
-						TopTrumpsCLIApplication.testlog.log(Level.FINE, "The contents of the complete deck once it has been read in and constructed" + "getDeckContent");
-		}
-		
-		if (TopTrumpsCLIApplication.writingTestLogs==true) {
-			TopTrumpsCLIApplication.testlog.log(Level.FINE, "The contents of the complete deck after it has been shuffled" + "getDeckContent");
-		}
-		//in the Gameplay after allocation of Decks
-		if (TopTrumpsCLIApplication.writingTestLogs==true) {
-			TopTrumpsCLIApplication.testlog.log(Level.FINE, "The contents of the user’s deck and the computer’s deck(s) once they have been allocated." + "p1.getDeckContent" + "p2.getDeckContent"+"p3.getDeckContent" + "p4.getDeckContent");
-		}
-		//In CardDecks in the Add/Remove CommonPileSection at the end
-		if (TopTrumpsCLIApplication.writingTestLogs==true) {
-			TopTrumpsCLIApplication.testlog.log(Level.FINE, "The contents of the communal pile when cards are added or removed from it" + "getCommunalPileContent");
-		}
-		//In Gameplay at the position when cards are compared - getCardsInPlay method needed
-		if (TopTrumpsCLIApplication.writingTestLogs==true) {
-			TopTrumpsCLIApplication.testlog.log(Level.FINE, "The contents of the current cards in play (the cards from the top of the user’s deck and the computer’s deck(s)):" + "getCardsInPlay");
-		}
-		
-		//In Gameplay when Category is selected, this is added, and also based on the category the value needs to be represented
-		if (TopTrumpsCLIApplication.writingTestLogs==true) {
-			TopTrumpsCLIApplication.testlog.log(Level.FINE, "The category selected and corresponding values when a user or computer selects a category" + "getCategorySelected" + "getCorrespondingValues");
-		}
-		//In Gameplay at the end of each round
-		if (TopTrumpsCLIApplication.writingTestLogs==true) {
-			TopTrumpsCLIApplication.testlog.log(Level.FINE, "The contents of each deck after a round" + "getDeckContent");
-		}
-		
-
-	}
-
+	
 }
