@@ -63,8 +63,8 @@ public class TopTrumpsDatabase {
 		
 		
 		//insert the values in the database, a bit updated, reference is: https://www.postgresqltutorial.com/postgresql-jdbc/insert/
-		public int updateDatabase(int numberOfGames, int winner, int numberOfDraws, int numberOfRounds) {
-			String SQL = "INSERT INTO GAME_STATS(GAME_ID,WIN,DRAWS,ROUNDS)" + "VALUESVALUES (?,?,?,?,?)";
+		public int updateDatabase(int numberOfGames, int userWin, int AI1Win, int AI2Win, int AI3Win, int AI4Win, int numberOfDraws, int numberOfRounds) {
+			String SQL = "INSERT INTO GAME_STATS(GAME_ID,WIN,DRAWS,ROUNDS)" + "VALUESVALUES (?,?,?,?,?,?,?,?)";
 			
 			int id = 0;
 	 
@@ -72,9 +72,13 @@ public class TopTrumpsDatabase {
 	             java.sql.PreparedStatement pstmt = connect.prepareStatement(SQL,Statement.RETURN_GENERATED_KEYS)) {
 	        	
 	            pstmt.setInt(1, numberOfGames);
-	            pstmt.setInt(2, winner);
-	            pstmt.setInt(3, numberOfDraws);
-	            pstmt.setInt(4, numberOfRounds);
+	            pstmt.setInt(2, userWin);
+	            pstmt.setInt(3, AI1Win);
+	            pstmt.setInt(4, AI2Win);
+	            pstmt.setInt(5, AI3Win);
+	            pstmt.setInt(6, AI4Win);
+	            pstmt.setInt(7, numberOfDraws);
+	            pstmt.setInt(8, numberOfRounds);
 	            
 	            //executes updates
 	            int affectedRows = pstmt.executeUpdate();
