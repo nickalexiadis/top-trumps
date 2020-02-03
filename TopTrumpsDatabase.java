@@ -36,9 +36,9 @@ public class TopTrumpsDatabase {
 		//setup the database connection, reference: https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/
 			public Connection connect() {
 				
-		    String dbname = "m_16_2287667k";
-			String username = "m_16_2287667k";
-			String password = "2287667k";
+		    String dbname = "m_19_2459499l";
+			String username = "m_19_2459499l";
+			String password = "2459499l";
 
 			try {
 				connection = DriverManager.getConnection("jdbc:postgresql://yacata.dcs.gla.ac.uk:5432/", username, password);
