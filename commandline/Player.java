@@ -1,5 +1,6 @@
 package commandline;
 
+
 import java.util.ArrayList;
 
 public class Player {
@@ -27,6 +28,7 @@ public class Player {
 		
 		
 		//places all players' cards at the bottom of the deck IF one of the players is the winner of the round
+		// Why is this method empty ? Is it needed?
 		public void placeCard() {
 			
 		}
@@ -46,11 +48,4 @@ public class Player {
 		public void addCard(Cards card) {
 			hand.add(card);
 		}
-
-	
-		
-		
-		
-		
-		
 }
