@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 import java.util.Scanner;
+import com.mysql.jdbc.PreparedStatement;
 
 //This class will establish the connection between the Database and the game, it will update the stats in the database.
  
@@ -13,108 +15,68 @@ public class TopTrumpsDatabase {
 		
 		//database columns, declared as variables 
 		private int numberOfGames;
+		private int winner;
+		private int numberOfDraws;
 		private int computerWins;
 		private int humanWins;
-		private int numberOfDraws;
 		private int numberOfRoundsPlayedInGame;
 		
-		//defining the attributes for the connection: URL, user and password
+		//defining the attributes for the connection: user and password
 		//create a variable for the connection along with the user ID and password 
-		//Question: do we need connection URL?
-		    private String username = "Add username";
-		    private String password ="Add password";
+		    private String username = "m_19_2459499l";
+		    private String password ="2459499l";
 		  
 		    //testing the database
 		    public static void main(String args[]) {
-		    	// input from standard in
-		    	Scanner input = new Scanner(System.in);
-		    	//user enters user name
-		    	System.out.print("Enter Username: ");
-		    	String username = input.nextLine();
-		    	//user enters password
-		    	System.out.print("Enter Password: ");
-		    	String password = input.nextLine();
-		    	System.out.println();
-		    	input.close();
+		    		TopTrumpsDatabase test = new TopTrumpsDatabase();
+		    		test.connect();
 		    }
 		    
 		//setup the database connection, reference: https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/
 		 public Connection connect() {
 		        Connection connection = null;
 		        try {
-		            connection = DriverManager.getConnection("jdbc:post" + "gresql://yacata.dcs.gla.ac.uk:5432/", username, password);
+		            connection = DriverManager.getConnection("jdbc:postgresql://yacata.dcs.gla.ac.uk:5432/"+ username, password);
 		            System.out.println("Connected to the PostgreSQL server successfully.");
 		        } catch (SQLException e) {
 		            System.out.println(e.getMessage());
 		        }
+		        System.out.println("Database is online and available");
+		 
 		        return connection;
 		    }
 
 		
-		//closing the database connection, Question: should the system let the user know with a statement whether the connection closed or 
-		//failed to close?
+		//closing the database connection
 		public void closeConenction() {
 			try {
 				connect().close();	
-				//System.out.println("Connection closed.");
 			} catch (SQLException e) {
 				e.printStackTrace();
-				//System.out.println("Connection failed closing.");
 			}
 		}
 		
 		//update the database, Question: How do we actually connect the game to the database? So as to update stats with each game played?
-		 public int updateGameStats(int numberOfGames, int computerWins, int humanWins, int numberOfDraws, int numberOfRoundsPlayedInGame) {
-		        String SQL = "UPDATE NUMBER_OF_GAMES, COMPUTER_WINS, HUMAN_WINS, DRAWS, NUMBER_OF_ROUNDS";
-		        int affectedrows = 0;
-		        try (Connection connection = connect();
-		                java.sql.PreparedStatement pstmt = connection.prepareStatement(SQL)) {
-		 
-		            //need to create counters for the number of games, computer wins, human wins, average number of draws, number of rounds in a game
-					pstmt.setInt(gamesCounter(), numberOfGames); 
-		            pstmt.setInt(computerWinCounter(), computerWins);
-		            pstmt.setInt(humanWinCounter(), humanWins);
-		            pstmt.setInt(drawsCounter(), numberOfDraws);
-		            pstmt.setInt(roundsCounter(), numberOfRoundsPlayedInGame);
-		 
-		            affectedrows = pstmt.executeUpdate();
-		 
-		        } catch (SQLException ex) {
-		            System.out.println(ex.getMessage());
-		        }
-		        return affectedrows;
-		    }
-		//we need counters for the update above
-		private int gamesCounter() {
-			int game = 0;
-			game ++;
-			return game;
-		}
-		
-		private int computerWinCounter() {
-			int computerWin = 0;
-			computerWin ++;
-			return computerWin;
-		}
-		
-		private int humanWinCounter() {
-			int humanWin = 0;
-			humanWin ++;
-			return humanWin;
-		}
-		
-		private int drawsCounter() {
-			int draws = 0;
-			draws ++;
-			return draws;
-			
-		}
-		
-		private int roundsCounter() {
-			int rounds = 0;
-			rounds ++;
-			return rounds;
-		}
+		public long updateDatabase(GamePlay game) {
+			String SQL = "INSERT INTO GAME_STATS(GAME_ID,WIN,DRAWS,ROUNDS)" + "VALUES(" + numberOfGames + ", " + numberOfDraws + ", " + numberOfRoundsPlayedInGame + "," + winner + ")";
+	 
+	        long id = 0;
+	 
+	        try (Connection connect = connect();
+	             java.sql.PreparedStatement pstmt = connect.prepareStatement(SQL,Statement.RETURN_GENERATED_KEYS)) {
+	 //we need methods within the gamePlay to call in the update method(or so I think)
+	            pstmt.setInt(1, game.getNumberOfGames());
+	            pstmt.setInt(2, game.getDrawCounter());
+	            pstmt.setInt(3, game.getNumberOfRounds());
+	            pstmt.setInt(4, game.getWins());
+	            
+	            pstmt.executeUpdate();
+	            
+	        } catch (SQLException ex) {
+	            System.out.println(ex.getMessage());
+	        }
+	        return id;
+	    }
 		 
 		//reference for the following getters: https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html
 		//query to return the number of games played overall  
@@ -183,7 +145,7 @@ public class TopTrumpsDatabase {
 			return humanWins;
 		}
 		
-		//James, query to return the average number of draws 
+		//query to return the average number of draws 
 		public double getNumberOfDraws() throws SQLException {
 			Statement stmt = null;
 			String queryFour = "select AVG(DRAWS)" + 
