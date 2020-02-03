@@ -15,17 +15,19 @@ public class TopTrumpsDatabase {
 		
 		//database columns, declared as variables 
 		private int numberOfGames;
-		private int winner;
 		private int numberOfDraws;
-		private int computerWins;
-		private int humanWins;
+		private int userWin;
+		private int ai1Win;
+		private int ai2Win;
+		private int ai3Win;
+		private int ai4Win;
 		private int numberOfRoundsPlayedInGame;
 		
 		//defining the attributes for the connection: user and password
-		//create a variable for the connection along with the user ID and password 
+
 		    private String username = "m_19_2459499l";
 		    private String password ="2459499l";
-		    private static Connection connection = null;
+	
 		  
 		    //testing the database
 		    public static void main(String args[]) {
@@ -35,11 +37,7 @@ public class TopTrumpsDatabase {
 		    
 		//setup the database connection, reference: https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/
 			public Connection connect() {
-				
-		    String dbname = "m_19_2459499l";
-			String username = "m_19_2459499l";
-			String password = "2459499l";
-
+				 Connection connection = null;
 			try {
 				connection = DriverManager.getConnection("jdbc:postgresql://yacata.dcs.gla.ac.uk:5432/", username, password);
 			}
@@ -121,12 +119,12 @@ public class TopTrumpsDatabase {
 			return numberOfGames;
 		 }
 		
-		//query to return how many times the computer has won 
-		public int getComputerWins() throws SQLException {
+		//query to return how many times the AI1 has won 
+		public int getAI1Wins() throws SQLException {
 			Statement stmt = null;
 			String queryTwo = "select COUNT(GAME_ID)" + 
 							  "from GAME_STATS" +
-							  "where winner = 'COMPUTER'";
+							  "where winner = 'AI1'";
 			try {
 				stmt = connect().createStatement();
 				ResultSet rs = stmt.executeQuery(queryTwo);
@@ -140,8 +138,71 @@ public class TopTrumpsDatabase {
 				if (stmt != null) { stmt.close();
 			        }
 			  }
-			return computerWins;
+			return ai1Win;
 		}
+		//query to return how many times the AI2 has won 
+				public int getAI2Wins() throws SQLException {
+					Statement stmt = null;
+					String queryTwo = "select COUNT(GAME_ID)" + 
+									  "from GAME_STATS" +
+									  "where winner = 'AI2'";
+					try {
+						stmt = connect().createStatement();
+						ResultSet rs = stmt.executeQuery(queryTwo);
+						while(rs.next()) {
+							int computerWins = rs.getInt("COMPUTER_WINS");
+							System.out.println(computerWins + "\t");
+						}
+					} catch (SQLException e) {
+						System.out.println("Failed to show number of computer wins.");
+					}finally {
+						if (stmt != null) { stmt.close();
+					        }
+					  }
+					return ai2Win;
+				}
+			//query to return how many times the AI3 has won 
+				public int getAI3Wins() throws SQLException {
+					Statement stmt = null;
+					String queryTwo = "select COUNT(GAME_ID)" + 
+									  "from GAME_STATS" +
+									  "where winner = 'AI1'";
+					try {
+						stmt = connect().createStatement();
+						ResultSet rs = stmt.executeQuery(queryTwo);
+						while(rs.next()) {
+							int computerWins = rs.getInt("COMPUTER_WINS");
+							System.out.println(computerWins + "\t");
+						}
+					} catch (SQLException e) {
+						System.out.println("Failed to show number of computer wins.");
+					}finally {
+						if (stmt != null) { stmt.close();
+					        }
+					  }
+					return ai3Win;
+				}
+			//query to return how many times the AI4 has won 
+				public int getAI4Wins() throws SQLException {
+					Statement stmt = null;
+					String queryTwo = "select COUNT(GAME_ID)" + 
+									  "from GAME_STATS" +
+									  "where winner = 'AI4'";
+					try {
+						stmt = connect().createStatement();
+						ResultSet rs = stmt.executeQuery(queryTwo);
+						while(rs.next()) {
+							int computerWins = rs.getInt("COMPUTER_WINS");
+							System.out.println(computerWins + "\t");
+						}
+					} catch (SQLException e) {
+						System.out.println("Failed to show number of computer wins.");
+					}finally {
+						if (stmt != null) { stmt.close();
+					        }
+					  }
+					return ai4Win;
+				}
 		
 		//query to return how many times the human has won  
 		public int getHumanWins() throws SQLException {
@@ -163,7 +224,7 @@ public class TopTrumpsDatabase {
 				if (stmt != null) { stmt.close();
 			        }
 			  }
-			return humanWins;
+			return userWin;
 		}
 		
 		//query to return the average number of draws 
