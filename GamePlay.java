@@ -41,32 +41,28 @@ public class GamePlay {
 	public static int playerChoice = 0;
 	public static boolean logCheck = false;
 	public static String chosenCategory ="";
+	
+
 
 	public static void main(String[] args) throws SecurityException, IOException, SQLException {
-
+		TopTrumpsDatabase stats = new TopTrumpsDatabase();
 		if (TopTrumpsCLIApplication.writingTestLogs == true) {
 			logCheck = true;
 		}
 		mode = gameOrStats();
-		
-///////////////added by Miruna///////////////////////////////////
-		TopTrumpsDatabase stats = new TopTrumpsDatabase();
-		
 
 		if (mode == 1) {
-			
-			
-			//needs work on getNumberOfGames, getWinner and getNumberOfRounds
-		//	 stats.updateDatabase(numberOfGames, winner, getDrawCounter(), numberOfRounds);
-			 
-			 stats.getNumberOfGames();
-			 stats.getComputerWins();
-			 stats.getHumanWins();
-			 stats.getNumberOfDraws();
-			 stats.getNumberOfRoundsPlayedInGame();
-			 
+				//TopTrumpsDatabase stats = new TopTrumpsDatabase();
+				stats.getNumberOfGames();
+				stats.getAI1Wins();
+				stats.getAI2Wins();
+				stats.getAI3Wins();
+				stats.getAI4Wins();
+				stats.getHumanWins();
+				stats.getNumberOfDraws();
+				stats.getNumberOfRoundsPlayedInGame();
 		}
-////////////////////////////////////////////////////////////////
+
 		gameOn = true;
 		while (gameOn) {
 			//Initialize variables
@@ -182,7 +178,7 @@ public class GamePlay {
 //Increments round
 				round++;
 				for (Player player : players) {
-					//Hinzufügen, dass aktuelle Karte nach hinten gepackt wird.
+					//HinzufÃ¼gen, dass aktuelle Karte nach hinten gepackt wird.
 					Cards tempCard = player.getHand().get(0);
 					player.getHand().remove(0);
 					player.getHand().add(tempCard);
@@ -372,13 +368,8 @@ public class GamePlay {
 		if (draw == true) {
 		//System.out.println("It was a draw");
 		drawHandler();
-		drawCounter++;
 		}
 
-	}
-	//getter for draw counter
-	public static int getDrawCounter() {
-		return drawCounter++;
 	}
 
 	// DrawHandler
@@ -461,7 +452,17 @@ public class GamePlay {
 			System.out.println(player.toString() + ": " + player.getWinCounter());
 		}
 	}
-
+//////////////////////////////////////////////////////DATABASE UPDATE///////////////////////////////////////////////////////////////////
+	
+	public static void updateDatabase() {
+    
+		//there is an issue here, it still needs a game counter, and the problem is we create a database obejct twice
+	TopTrumpsDatabase stats = new TopTrumpsDatabase();
+	stats.updateDatabase(user.getWinCounter(), player1.getWinCounter(), player2.getWinCounter(), player3.getWinCounter(),player4.getWinCounter(), drawCounter, round);
+	
+	}
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static int gameOrStats() {
 		Scanner sc = new Scanner(System.in);
 		int res = 0;
