@@ -61,15 +61,14 @@ public class TopTrumpsDatabase {
 		
 		
 		//insert the values in the database, a bit updated, reference is: https://www.postgresqltutorial.com/postgresql-jdbc/insert/
-		public int updateDatabase(int numberOfGames, int userWin, int AI1Win, int AI2Win, int AI3Win, int AI4Win, int numberOfDraws, int numberOfRounds) {
-			String SQL = "INSERT INTO GAME_STATS(GAME_ID,WIN,DRAWS,ROUNDS)" + "VALUESVALUES (?,?,?,?,?,?,?,?)";
+		public int updateDatabase(int userWin, int AI1Win, int AI2Win, int AI3Win, int AI4Win, int numberOfDraws, int numberOfRounds) {
+			String SQL = "INSERT INTO GAME_STATS(USER_WIN,AI1_WIN,AI2_WIN,AI3_WIN,AI4_WIN,DRAWS,ROUNDS)" + "VALUESVALUES (?,?,?,?,?,?,?)";
 			
 			int id = 0;
 	 
 	        try (Connection connect = connect();
 	             java.sql.PreparedStatement pstmt = connect.prepareStatement(SQL,Statement.RETURN_GENERATED_KEYS)) {
 	        	
-	            pstmt.setInt(1, numberOfGames);
 	            pstmt.setInt(2, userWin);
 	            pstmt.setInt(3, AI1Win);
 	            pstmt.setInt(4, AI2Win);
@@ -95,6 +94,7 @@ public class TopTrumpsDatabase {
 	            System.out.println(ex.getMessage());
 	        }
 	        return id;
+	        
 	    }
 		 
 		//reference for the following getters: https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html
@@ -269,7 +269,5 @@ public class TopTrumpsDatabase {
 				}
 		    }
 			return numberOfRoundsPlayedInGame;	
-		 }
-
-		
+		 }		
 }
