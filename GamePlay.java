@@ -41,28 +41,29 @@ public class GamePlay {
 	public static int playerChoice = 0;
 	public static boolean logCheck = false;
 	public static String chosenCategory ="";
-	
+
 
 
 	public static void main(String[] args) throws SecurityException, IOException, SQLException {
-		TopTrumpsDatabase stats = new TopTrumpsDatabase();
+	
 		if (TopTrumpsCLIApplication.writingTestLogs == true) {
 			logCheck = true;
 		}
 		mode = gameOrStats();
 
 		if (mode == 1) {
-				//TopTrumpsDatabase stats = new TopTrumpsDatabase();
-				stats.getNumberOfGames();
-				stats.getAI1Wins();
-				stats.getAI2Wins();
-				stats.getAI3Wins();
-				stats.getAI4Wins();
-				stats.getHumanWins();
-				stats.getNumberOfDraws();
-				stats.getNumberOfRoundsPlayedInGame();
+			TopTrumpsDatabase stats = new TopTrumpsDatabase();
+			
+			stats.getAI1Wins();
+			stats.getAI2Wins();
+			stats.getAI3Wins();
+			stats.getAI4Wins();
+			stats.getHumanWins();
+			stats.getNumberOfDraws();
+			stats.getNumberOfRoundsPlayedInGame();
+	
+			
 		}
-
 		gameOn = true;
 		while (gameOn) {
 			//Initialize variables
@@ -93,8 +94,8 @@ public class GamePlay {
 			//////////////////////////////////////////////////////////////////
 //			While the players hasn't chosen number of AI players, asks for input
 			numPlayers = AskForAIPlayers();
-			
-			
+
+
 //			Creates the ArrayList of players, initializes the user player and adds them to the array
 			user = new Player("You", new ArrayList<Cards>());
 			players.add(user);
@@ -108,6 +109,7 @@ public class GamePlay {
 //			Randomly selects the player who will decide the first category
 			activePlayer = randomSelectPlayer();
 
+			
 			System.out.println("Game Start");
 
 //			Initialize deck
@@ -154,13 +156,13 @@ public class GamePlay {
 			while (players.size() > 1) {
 
 				System.out.println("\n" + "Round " + round);
-				
+
 // By uncommenting this you can directly see how much every player has each round				
 //				for (Player player : players) {
 //					System.out.println(player.getPlayerID() + " " + player.getHand().size());
 //				}
 ////////////////////////////////////////////////////////////////////////////////////////////////
-				
+
 				System.out.println("Round " + round + ": Players have drawn their cards");
 
 //				If the user is still in the game, displays his top card and remaining number of cards of their deck
@@ -439,7 +441,7 @@ public class GamePlay {
 /////////////////////////////////
 
 //	Handles game end
-	public static void gameEndHandler() {
+	public static void gameEndHandler()  {
 		round--;
 		// Why players.get(0) this is hard coded, wouldn't lead that to always the same
 		// winner
@@ -450,19 +452,11 @@ public class GamePlay {
 
 		for (Player player : endgameArray) {
 			System.out.println(player.toString() + ": " + player.getWinCounter());
+			
 		}
 	}
-//////////////////////////////////////////////////////DATABASE UPDATE///////////////////////////////////////////////////////////////////
 	
-	public static void updateDatabase() {
-    
-		//there is an issue here, it still needs a game counter, and the problem is we create a database obejct twice
-	TopTrumpsDatabase stats = new TopTrumpsDatabase();
-	stats.updateDatabase(user.getWinCounter(), player1.getWinCounter(), player2.getWinCounter(), player3.getWinCounter(),player4.getWinCounter(), drawCounter, round);
-	
-	}
-	
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public static int gameOrStats() {
 		Scanner sc = new Scanner(System.in);
 		int res = 0;
@@ -486,5 +480,16 @@ public class GamePlay {
 			}
 		}
 	}
+//////////////////////////////////////////////////////DATABASE UPDATE///////////////////////////////////////////////////////////////////
+
+public void insertDatabase() {
+	
+	TopTrumpsDatabase stats = new TopTrumpsDatabase();
+	
+	stats.insertDatabase(user.getWinCounter(), player1.getWinCounter(), player2.getWinCounter(), player3.getWinCounter(),player4.getWinCounter(), drawCounter, round);
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
