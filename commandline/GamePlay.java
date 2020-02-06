@@ -1,6 +1,7 @@
 package commandline;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -41,17 +42,28 @@ public class GamePlay {
 	public static boolean logCheck = false;
 	public static String chosenCategory ="";
 
-	public static void main(String[] args) throws SecurityException, IOException {
 
+
+	public static void main(String[] args) throws SecurityException, IOException, SQLException {
+	
 		if (TopTrumpsCLIApplication.writingTestLogs == true) {
 			logCheck = true;
 		}
 		mode = gameOrStats();
 
 		if (mode == 1) {
-//			Stats function!
+			TopTrumpsDatabase stats = new TopTrumpsDatabase();
+			
+			stats.getAI1Wins();
+			stats.getAI2Wins();
+			stats.getAI3Wins();
+			stats.getAI4Wins();
+			stats.getHumanWins();
+			stats.getNumberOfDraws();
+			stats.getNumberOfRoundsPlayedInGame();
+	
+			
 		}
-
 		gameOn = true;
 		while (gameOn) {
 			//Initialize variables
@@ -82,8 +94,8 @@ public class GamePlay {
 			//////////////////////////////////////////////////////////////////
 //			While the players hasn't chosen number of AI players, asks for input
 			numPlayers = AskForAIPlayers();
-			
-			
+
+
 //			Creates the ArrayList of players, initializes the user player and adds them to the array
 			user = new Player("You", new ArrayList<Cards>());
 			players.add(user);
@@ -97,6 +109,7 @@ public class GamePlay {
 //			Randomly selects the player who will decide the first category
 			activePlayer = randomSelectPlayer();
 
+			
 			System.out.println("Game Start");
 
 //			Initialize deck
@@ -143,13 +156,13 @@ public class GamePlay {
 			while (players.size() > 1) {
 
 				System.out.println("\n" + "Round " + round);
-				
+
 // By uncommenting this you can directly see how much every player has each round				
 //				for (Player player : players) {
 //					System.out.println(player.getPlayerID() + " " + player.getHand().size());
 //				}
 ////////////////////////////////////////////////////////////////////////////////////////////////
-				
+
 				System.out.println("Round " + round + ": Players have drawn their cards");
 
 //				If the user is still in the game, displays his top card and remaining number of cards of their deck
@@ -167,7 +180,7 @@ public class GamePlay {
 //Increments round
 				round++;
 				for (Player player : players) {
-					//HinzufÃ¼gen, dass aktuelle Karte nach hinten gepackt wird.
+					//Hinzufügen, dass aktuelle Karte nach hinten gepackt wird.
 					Cards tempCard = player.getHand().get(0);
 					player.getHand().remove(0);
 					player.getHand().add(tempCard);
@@ -280,6 +293,9 @@ public class GamePlay {
 
 //	Creates the appropriate number of AI players based on user choice and adds them to the players array
 	public static void createAIPlayers(int numPlayers) {
+		//////// remove this line below for having a choice
+		numPlayers = 4;
+		/////////
 		if (numPlayers == 1) {
 			player1 = new Player("AI Player 1", new ArrayList<Cards>());
 			players.add(player1);
@@ -428,7 +444,7 @@ public class GamePlay {
 /////////////////////////////////
 
 //	Handles game end
-	public static void gameEndHandler() {
+	public static void gameEndHandler()  {
 		round--;
 		// Why players.get(0) this is hard coded, wouldn't lead that to always the same
 		// winner
@@ -439,8 +455,11 @@ public class GamePlay {
 
 		for (Player player : endgameArray) {
 			System.out.println(player.toString() + ": " + player.getWinCounter());
+			
 		}
+		insertDatabase();
 	}
+	
 
 	public static int gameOrStats() {
 		Scanner sc = new Scanner(System.in);
@@ -465,5 +484,16 @@ public class GamePlay {
 			}
 		}
 	}
+//////////////////////////////////////////////////////DATABASE UPDATE///////////////////////////////////////////////////////////////////
+
+public static void insertDatabase() {
+	
+	TopTrumpsDatabase stats = new TopTrumpsDatabase();
+	//Currently only works with 4 Players, AutoIncrement for GameID is not implemented
+	stats.insertDatabase(drawCounter, gameWinner.toString(), round, user.getWinCounter(), player1.getWinCounter(), player2.getWinCounter(), player3.getWinCounter(),player4.getWinCounter());
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
