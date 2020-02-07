@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Top Trumps</title>
+       <link href="style.css" rel="stylesheet">
+  </head>
+
+<!-- CSS part -->
+<style>
+#wholepage{
+	/*background-color: #aaf;*/
+	width: 80%;
+  height: 700px;
+  /*width: 50%;*/
+  /*background-color: powderblue;*/
+	margin-left: auto;
+	margin-right:auto;
+}
+.title{
+
+	background-color: #ccc;
+	text-align: center;
+	padding: 2px;
+
+}
+.round-state{
+
+	background-color: #a1c;
+	text-align: left;
+	color: white;
+	/*padding: 2px;*/
+
+
+}
+.my-container{
+	background-color: grey;
+	height: 650px;
+	/*text-align: center;*/
+
+}
+.btn-group-vertical{
+	width: 80%;
+}
+.card{
+
+	height: 300px;
+	max-width: 200px;
+	padding: 2px;
+}
+#selection{
+	background-color: #999;
+	padding: 10px;
+	height: 500px;
+	width: 20%;
+	float: left;
+}
+#user-card{
+	background-color: #454;
+	padding: 10px;
+	height: 500px;
+	width: 20%;
+	float: right;
+}
+</style>
+
+<!-- begining of page -->
+  <div id="wholepage">
+    <body>
+   
+     <!-- main heading of game -->
+        <section class="title">
+          <div>
+            <h3>Top Trumps Game </h3>
+          </div>  
+        </section>
+
+      <!-- declare current round and winner -->
+        <section class="round-state">
+            <p>Round 1: Players have selected ...</p>
+        </section>
+
+		<form>
+			<p>Please select the number of players you want to play against:</p>
+			  <input type="radio">One Player<br>
+			  <input type="radio">Two Players<br>
+			  <input type="radio">Three Players<br> 
+			  <input type="radio">Four Players<br>  
+			  <input type="submit" value="Submit">
+		</form>
+
+        <!-- cards display section: 2 rows, 4 cols-->
+       <div class="container my-container">
+        <!-- row 1 col 1 to hold category selection buttons and next round button -->
+
+          <div class="row">
+
+            <div class="col">
+              <div class="row" style= "padding:2px ; max-width: 100%;">
+               <button class="btn btn-success">Next Round</button>
+              </div>
+
+              <!-- should only appear if the user is the acive player -->
+              <div class="btn-group-vertical">
+                <button type="button" class="btn btn-primary">size</button>
+                <button type="button" class="btn btn-primary">speed</button>
+                <button type="button" class="btn btn-primary">cargo</button>
+                <button type="button" class="btn btn-primary">range</button>
+                <button type="button" class="btn btn-primary">firepower</button>
+                
+              </div>  
+            </div>
+
+
+            <div class="col">
+               <img class="card" src="ship.jpg" alt="USER">
+
+            </div> 
+
+            <div class="col">
+              <img class="card" src="ship.jpg" alt="AI 1">
+            </div>
+          
+            <div class="col">
+             <img class="card" src="ship.jpg" alt="AI 2">
+
+             </div>
+            </div>
+
+          <p></p>
+          <div class="row">
+            <div class="col">
+              EMPTY
+            </div>
+
+            <div class="col">
+              EMPTY
+            </div> 
+
+            <div class="col"> 
+              <img class="card" src="ship.jpg" alt="AI 3">
+            </div>
+            <div class="col">
+              <img class="card" src="ship.jpg" alt="AI 4">
+
+            </div> 
+          
+          </div>
+
+          <div class="row" style="background-color: powderblue;">
+            
+          </div>
+        </div>
+
+
+      <!-- Jquery Stuff here-->
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"> 
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+	  </script>
+
+<!--This is a reusable method for creating a CORS request. Do not edit this. -->
+<script type="text/javascript">
+	function createCORSRequest(method, url) {
+	  var xhr = new XMLHttpRequest();
+		  if ("withCredentials" in xhr) {
+	
+						// Check if the XMLHttpRequest object has a "withCredentials" property.
+						// "withCredentials" only exists on XMLHTTPRequest2 objects.
+			xhr.open(method, url, true);
+	
+		  } else if (typeof XDomainRequest != "undefined") {
+	
+						// Otherwise, check if XDomainRequest.
+						// XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+		  xhr = new XDomainRequest();
+			xhr.open(method, url);
+	
+			 } else {
+	
+				// Otherwise, CORS is not supported by the browser.
+			xhr = null;
+	
+		  }return xhr;
+		  }
+		</script>	
+    </body>
+  </div>
+</html>
