@@ -1,0 +1,61 @@
+#wholepage{
+	/*background-color: #aaf;*/
+	width: 80%;
+  height: 700px;
+  /*width: 50%;*/
+  /*background-color: powderblue;*/
+	margin-left: auto;
+	margin-right:auto;
+}
+
+.title{
+
+	background-color: #ccc;
+	text-align: center;
+	padding: 2px;
+
+}
+
+.round-state{
+
+	background-color: #a1c;
+	text-align: left;
+	color: white;
+	/*padding: 2px;*/
+
+
+}
+.my-container{
+	background-color: grey;
+	height: 650px;
+	/*text-align: center;*/
+
+}
+
+.btn-group-vertical{
+	width: 80%;
+}
+.card{
+
+	height: 300px;
+	max-width: 200px;
+	padding: 2px;
+}
+	
+
+#selection{
+	background-color: #999;
+	padding: 10px;
+	height: 500px;
+	width: 20%;
+	float: left;
+}
+
+#user-card{
+	background-color: #454;
+	padding: 10px;
+	height: 500px;
+	width: 20%;
+	float: right;
+}
+}

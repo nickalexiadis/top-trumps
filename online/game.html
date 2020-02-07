@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>TOP TRUMPS</title>
+       <link href="style.css" rel="stylesheet">
+  </head>
+
+    <!-- begining of page -->
+  <div id="wholepage">
+    <body>
+   
+     <!-- main heading of game -->
+        <section class="title">
+          <div>
+            <h3>Top Trumps Game </h3>
+          </div>  
+        </section>
+
+      <!-- declare current round and winner -->
+        <section class="round-state">
+            <p>Round 1: Players have selected ...</p>
+        </section>
+
+        <!-- cards display section: 2 rows, 4 cols-->
+       <div class="container my-container">
+        <!-- row 1 col 1 to hold category selection buttons and next round button -->
+
+          <div class="row">
+
+            <div class="col">
+              <div class="row" style= "padding:2px ; max-width: 100%;">
+               <button class="btn btn-success">Next Round</button>
+              </div>
+
+              <!-- should only appear if the user is the acive player -->
+              <div class="btn-group-vertical">
+                <button type="button" class="btn btn-primary">size</button>
+                <button type="button" class="btn btn-primary">speed</button>
+                <button type="button" class="btn btn-primary">cargo</button>
+                <button type="button" class="btn btn-primary">range</button>
+                <button type="button" class="btn btn-primary">firepower</button>
+                
+              </div>  
+            </div>
+
+
+            <div class="col">
+               <img class="card" src="ship.jpg" alt="USER">
+
+            </div> 
+
+            <div class="col">
+              <img class="card" src="ship.jpg" alt="AI 1">
+            </div>
+          
+            <div class="col">
+             <img class="card" src="ship.jpg" alt="AI 2">
+
+             </div>
+            </div>
+
+          <p></p>
+          <div class="row">
+            <div class="col">
+              EMPTY
+            </div>
+
+            <div class="col">
+              EMPTY
+            </div> 
+
+            <div class="col"> 
+              <img class="card" src="ship.jpg" alt="AI 3">
+            </div>
+            <div class="col">
+              <img class="card" src="ship.jpg" alt="AI 4">
+
+            </div> 
+          
+          </div>
+
+          <div class="row" style="background-color: powderblue;">
+            FOOTER
+          </div>
+        </div>
+
+
+      <!-- Jquery Stuff here-->
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"> 
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+      </script>
+
+    </body>
+  </div>
+
+
+
+</html>
