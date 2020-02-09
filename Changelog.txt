@@ -4,7 +4,8 @@ Changelog:
 +Cleaned up variables and constructor
 +Finished converting GamePlay into methods and organised them more
 +Created a GamePlay object in the RunCommandLine class and made it run the game with playGame() method
++Added a getTopCard() method in Player Class and integrated it into existing code
 +No obvious bugs
--playGame() needs a loop to go back to the start of the game on finishing, suspect the variable will be a boolean type
+-playGame() needs a loop to go back to the start of the game on finishing, might need a boolean
 
 
