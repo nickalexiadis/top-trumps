@@ -35,6 +35,7 @@ public class GamePlay {
 		dealCards();
 		playRounds();
 		endOfGame();
+		playGame();
 	}
 
 	// Log Check method
@@ -431,7 +432,7 @@ public class GamePlay {
 	public int nextRound() {
 		round++;
 		for (Player player : players) {
-			// Hinzufügen, dass aktuelle Karte nach hinten gepackt wird.
+			// HinzufÃ¼gen, dass aktuelle Karte nach hinten gepackt wird.
 			Cards tempCard = player.getTopCard();
 			player.getHand().remove(0);
 			player.getHand().add(tempCard);
