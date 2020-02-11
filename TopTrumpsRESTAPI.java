@@ -18,7 +18,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
+import commandline.Cards;
 import commandline.GamePlay;
+import commandline.Player;
 import commandline.TopTrumpsDatabase;
 
 @Path("/toptrumps") // Resources specified here should be hosted at http://localhost:7777/toptrumps
@@ -40,7 +42,7 @@ public class TopTrumpsRESTAPI {
 	 * into JSON strings easily. */
 	ObjectWriter oWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
 	
-	GamePlay game = new GamePlay();
+	GamePlay g = new GamePlay();
 	
 	/**
 	 * Contructor method for the REST API. This is called first. It provides
@@ -51,7 +53,14 @@ public class TopTrumpsRESTAPI {
 	public TopTrumpsRESTAPI(TopTrumpsJSONConfiguration conf) {
 		
 	}
-	 
+	//When you press New Game, this function will be called to ask for AI players
+	@GET
+	@Path("/askPlayer")
+	public void askPlayer(int num) throws JsonProcessingException {
+		g.createPlayers(num);
+	}
+	
+		
 	@GET 
 	@Path("/getGame")
 	public void startGame() {
@@ -63,6 +72,7 @@ public class TopTrumpsRESTAPI {
 	public void getStats() {
 		
 	}
+	
 	
 	//game play methods
 	
