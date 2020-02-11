@@ -31,12 +31,13 @@ public class GamePlay {
 		// Needs a while(userWantsToQuit = false) loop to go back to the beginning
 		// after a game is completed.
 		gameOrStats();
-		createPlayers();
+		createPlayers(askForAIPlayers());
 		dealCards();
 		playRounds();
 		endOfGame();
 		playGame();
 	}
+	
 
 	// Log Check method
 	public void logCheck() {
@@ -106,14 +107,14 @@ public class GamePlay {
 
 	// Creates the User player and the appropriate number of AI players based on
 	// user choice, and adds them to the player's array
-	public void createPlayers() {
+	public void createPlayers(int num) {
 
 		// Creates User Player
 		user = new Player("You", new ArrayList<Cards>());
 		players.add(user);
 
 		// Creates AI Players after User has decided how many AI to play against
-		int numPlayers = askForAIPlayers();
+		int numPlayers = num;
 
 		if (numPlayers == 1) {
 			player1 = new Player("AI Player 1", new ArrayList<Cards>());
@@ -482,6 +483,6 @@ public class GamePlay {
 	public void endOfGame() {
 		gameEndHandler();
 		// insertDatabase(); // Uncomment this when database is connected
-		s.close();
+		//s.close(); needs to be moved
 	}
 }
