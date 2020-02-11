@@ -88,9 +88,8 @@ h1 {
         </section>
 
       <!-- declare current round and winner -->
-        <section class="round-state">
-            <p>Play Round<p id="getRound"></p> Players have selected ...</p>
-            
+        <section class="round-state" id ="roundDisplay">
+            <p>Play Round<p id="getRound"></p> Players have selected ...</p> 
         </section>
 
     <div id="selectPlayers">					
@@ -186,11 +185,29 @@ h1 {
 		xhr.send();		
   }
 
+//when the Player Selection screen is on, hide everything else
 function showPlayerSelection(){
     $('#container').hide();
   }
+//when the User submits the numebr of players they want to play against, it shows the container
+//with 
+//if the CURRENT PLAYER IS USER -> YOU NEED TO SHOW THE CARDS and CATEGORIES TO CHOOSE FROM
+function hidePlayerSelectionWhenUser() {
+  $('#selectPlayers').hide();
+  $('#container').show(); 
+  $('#AI1Card').hide();
+  $('#AI2Card').hide();
+  $('#AI3Card').hide();
+  $('#AI4Card').hide();
+}
+//if the CURRENT PLAYER IS AI -> YOU NEED TO SHOW JUST THE USER CARD, or make categories buttons
+//inactive?
+function hidePlayerSelectionWhenAI() {
 
-function hidePlayerSelection() {
+}
+
+//
+function showGamePlay() {
   $('#selectPlayers').hide();
   $('#container').show(); 
   $('#AI1Card').hide();
@@ -199,8 +216,21 @@ function hidePlayerSelection() {
   $('#AI4Card').hide();
 }
 
+//when Next Category Selection is pressed 
+//show(round display "Player has selected (varCategory)",all cards, 
+//active player varPlayer)
+function showRound(){
+
+}
+
+//when Show Winner Button is pressed : 
+//show(round display "Player varPlayer won this round", Next Round button)
+function showWinner() {
+
+}
 
 
+//actual gameplay
 
 function startGame(){
 
