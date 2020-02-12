@@ -162,6 +162,24 @@ h1 {
     showPlayerSelection();
   }
 
+
+  <#--  on click: new Game  
+  as next round but also call decideFirstTurn-->
+
+  <#--  On click: Category btn 
+  call activeUserInput handler, display all cards, if user: display options,->
+
+
+  <#--  On click: show Winner btn
+  call findRoundWinner, drawChecker, drawHandler, victoryHandler, removeLosers, endGame + display round winner -->
+
+  <#--  On click: next round btn  
+  call nextRound, display "players have drawn cards", "user card", activeplayer -->
+
+  <#--  on endgame: display game is over, stats, last 2 player cards  -->
+
+
+
     function getRound() {
 		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRound"); 
 		if (!xhr) {
@@ -174,17 +192,21 @@ h1 {
 		xhr.send();		
 	 }
 
-  function choosePlayers() {
-    var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/choosePlayers"); 
+  function setPlayers() {
+    var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/setPlayers"); 
 		if (!xhr) {
   		alert("CORS not supported");
 		}
 		xhr.onload = function(e) {
  			var responseText = xhr.response; 
-			$("#choosePlayers").text(responseText);
 		};
 		xhr.send();		
   }
+
+
+
+
+
 
 function showPlayerSelection(){
     $('#container').hide();
